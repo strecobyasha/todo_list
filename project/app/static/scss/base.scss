@@ -1,0 +1,84 @@
+@import './_variables';
+
+* { 
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0;
+}
+
+html {  
+    scroll-behavior: smooth;  
+}
+
+
+header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    padding: 0 5%;
+    align-items: center;
+    background-color: white;
+    color: $brand-color;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .2);
+    z-index: 2;
+
+    #brand-logo {
+        width: 30%;
+        font-size: $logo-size;
+        a {
+            text-decoration: none;
+            color: $brand-color;
+        }
+
+        a:hover {
+           color: $header-hover-color;
+        }
+    }
+
+    .account {
+        display: flex;
+        width: 70%;
+        justify-content: flex-end;
+        font-size: $account-size;
+
+        div {
+            margin-left: 20px;
+
+            a {
+                color: $brand-color;
+                text-decoration: none;
+            }
+            a:hover {
+                color: $header-hover-color;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+main {
+    margin-top: 70px;
+    padding: 0 5%;
+}
+
+
+@media (min-width: 768px) {
+
+    body {
+        margin: 0 20%;
+    }
+
+    header {
+        width: 60%;
+    }
+
+    main {
+        padding: 0;
+    }
+}

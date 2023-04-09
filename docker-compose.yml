@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+
+  database:
+    image: postgres:14.3
+    container_name: database
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+
+  oltp:
+    container_name: oltp
+    image: mongo
+    ports:
+      - ${OLTP_PORT}:${OLTP_PORT}
+
+  project:
+    platform: linux/amd64
+    build: ./project
+    container_name: project
+    volumes:
+      - static:/var/www/static
+      - media:/var/www/media
+    expose:
+      - "8000"
+    env_file:
+      - .env
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    volumes:
+      - static:/var/www/static
+      - media:/var/www/media
+    ports:
+      - "80:80"
+    depends_on:
+      - project
+    restart: always
+
+volumes:
+  postgres:
+  static:
+  media:
