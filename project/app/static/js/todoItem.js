@@ -37,6 +37,14 @@ function TodoItem({ id, index, new_content, new_status, updateItem, removeItem }
         updateItem(id, new_content, new_status);
     };
 
+    const handleChange = (event) => {
+        // This is a crutch for bug: when user inputs text and then tap "Change status",
+        // onBlur function isn't called. Therefore, we need to track content changes in real time.
+        // Unfortunately, in history this two operations will be stored as one...
+        const liveContent = event.target.innerHTML;
+        setContent(liveContent);
+    }
+
     const handleStatusChange = () => {
         // Change the TODO item status (done, undone).
         let new_status = true ? status === false : false;
@@ -63,6 +71,7 @@ function TodoItem({ id, index, new_content, new_status, updateItem, removeItem }
                     <div // TODO item content is stored in this div.
                         contentEditable={isEditing}
                         onBlur={handleContentBlur}
+                        onInput={handleChange}
                         onClick={handleDoubleClick}
                         className="content"
                         dangerouslySetInnerHTML={{ __html: new_content }}

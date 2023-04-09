@@ -1,3 +1,11 @@
+"""
+Items storage client.
+
+This is MongoDB storage, that is convenient option for storing unstructured data,
+such as users _TODO items.
+
+"""
+
 import motor.motor_asyncio
 from pymongo import errors
 

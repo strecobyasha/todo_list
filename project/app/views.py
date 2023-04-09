@@ -24,6 +24,7 @@ def prolong_session(request) -> None:
 
 
 def create_context(user) -> dict:
+    # Key 'user' uses for auth checks. Key 'user_id' is a key for items storage.
     user_id = re.sub(r'[^\w.-]', '', str(user))
     return {
         'user': user,
